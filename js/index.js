@@ -110,3 +110,35 @@ function hexToRgba(hex, alpha) {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
+const scrollContainer = document.querySelector(".main_social");
+
+document.addEventListener("wheel", (event) => {
+  event.preventDefault();
+
+  scrollContainer.scrollBy({
+    left: event.deltaY,
+    behavior: "auto",
+  });
+});
+
+const indicators = document.querySelectorAll(".header_single");
+const imagews = document.querySelectorAll(".main_social_img");
+const container = document.querySelector(".main_social");
+
+indicators.forEach((indicator, index) => {
+  indicator.addEventListener("click", () => {
+    const image = imagews[index];
+    const containerWidth = container.offsetWidth;
+    const imageLeft = image.offsetLeft;
+    const imageWidth = image.offsetWidth;
+
+    const scrollPosition = imageLeft - (containerWidth - imageWidth) / 2;
+    container.scrollTo({
+      left: scrollPosition,
+      behavior: "smooth",
+    });
+
+    imagews.forEach((img) => img.classList.remove("active"));
+    image.classList.add("active");
+  });
+});
