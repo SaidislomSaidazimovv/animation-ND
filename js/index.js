@@ -142,3 +142,4 @@ indicators.forEach((indicator, index) => {
     image.classList.add("active");
   });
 });
+
